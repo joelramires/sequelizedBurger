@@ -5,7 +5,7 @@ const exphbs = require('express-handlebars');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const apiRoutes = require("./routes/apiRoutes");
+var db = require("./models");
 
 // set up necessarily middleware
 app.use(express.urlencoded({ extended: true }));
@@ -20,7 +20,7 @@ app.set('view engine', 'handlebars');
 
 // turn on routes
 require('./routes/htmlRoutes')(app);
-// require('./routes/apiRoutes')(app);
+require('./routes/apiRoutes')(app);
 app.use(apiRoutes);
 
 // set up wildcard (404) route
@@ -32,4 +32,8 @@ app.get('*', function(req, res) {
 });
 
 // turn on server
-app.listen(PORT, () => console.log(`🌍 => listening to http://localhost:${PORT}`));
+db.sequelize.sync({ force: false }).then(function() {
+  app.listen(PORT, function() {
+    console.log("App listening on PORT " + PORT);
+  });
+});
