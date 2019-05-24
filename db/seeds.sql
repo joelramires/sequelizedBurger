@@ -1,4 +1,4 @@
-USE burger_db;
+USE sequlizeBurgerDB;
 
 INSERT INTO burgers
   (burger_name)
