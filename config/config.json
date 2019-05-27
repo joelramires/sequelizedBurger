@@ -3,7 +3,7 @@
   "development": {
     "username": "root",
     "password": "Justdo1t",
-    "database": "sequlizeBurger_db",
+    "database": "sequlizeBurgerDb",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

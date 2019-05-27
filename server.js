@@ -21,7 +21,7 @@ app.set('view engine', 'handlebars');
 // turn on routes
 require('./routes/htmlRoutes')(app);
 require('./routes/apiRoutes')(app);
-app.use(apiRoutes);
+
 
 // set up wildcard (404) route
 app.get('*', function(req, res) {

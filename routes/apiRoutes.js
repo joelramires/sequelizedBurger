@@ -1,10 +1,12 @@
-// import our burger model
-const burgers = require("../models/burgers");
-const router = require("express").Router();
+// require model functions
+var db = require("../models");
+
+// exports routes to be used in server.js
+module.exports = app => {
 
   // GET all burgers
-  router.get("/api/burgers", function(req, res) {
-    burgers.findAll()
+  app.get("/api/burgers", function(req, res) {
+   burgers.findall({})
       .then(dbBurgerData => res.json(dbBurgerData))
       .catch(err => {
         console.log(err);
@@ -13,9 +15,8 @@ const router = require("express").Router();
   });
 
   // create/POST a new burger
-  router.post("/api/burgers", function(req, res) {
-    // pass req.body into create method 
-    // req.body => {name: "catty cat"}
+  app.post("/api/burgers", function(req, res) {
+    
     burgers.create(req.body)
       .then(dbBurgerData => res.json(dbBurgerData))
       .catch(err => {
@@ -26,7 +27,7 @@ const router = require("express").Router();
 
 
   // get a burger by its id
-  router.get("/api/burgers/:id", function(req, res) {
+  app.get("/api/burgers/:id", function(req, res) {
     burgers.findById(req.params.id)
       .then(dbBurgerData => res.json(dbBurgerData))
       .catch(err => {
@@ -36,7 +37,7 @@ const router = require("express").Router();
   });
 
   // PUT/update a burger's eaten to true/false by id
-  router.put("/api/burgers/:id", function(req, res) {
+  app.put("/api/burgers/:id", function(req, res) {
     // req.body => {eaten: true} || {eaten : false}
     burgers.update(req.body.eaten, req.params.id)
       .then(dbBurgerData => res.json(dbBurgerData))
@@ -47,7 +48,7 @@ const router = require("express").Router();
   });
 
   // DELETE a burger by its id
-  router.delete("/api/burgers/:id", function(req, res) {
+  app.delete("/api/burgers/:id", function(req, res) {
     burgers.remove(req.params.id)
       .then(dbBurgerData => res.json(dbBurgerData))
       .catch(err => {
@@ -56,4 +57,4 @@ const router = require("express").Router();
       });
   });
 
-  module.exports = router;
+}

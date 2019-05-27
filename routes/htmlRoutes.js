@@ -1,5 +1,5 @@
 // import our burgers model
-const burgers = require("../models/burgers");
+const burgers = require("../models");
 
 // export our route definitions as a function
 module.exports = (app) => {
